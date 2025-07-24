@@ -1,8 +1,11 @@
 import { gameState, modifyStat, modifyInventory } from './state.js';
 import { generateMap, travelTo } from './map.js';
-import { updateHUD } from './ui.js';
+import { updateHUD, showToast } from './ui.js';
 import { initEvents, drawRandomEvent } from './eventEngine.js';
 import { showModal } from './modal.js';
+import { openMenu, closeMenu } from './menuManager.js';
+import { randomQuip } from './flavor.js';
+import { initTooltips } from './tooltip.js';
 import { loadImages, images } from './loader.js';
 
 let ctx, nodes;
@@ -26,7 +29,11 @@ function checkGameOver() {
         gameEnded = true;
         travelBtn.disabled = true;
         campBtn.disabled = true;
-        showModal({ title: 'Game Over', description: 'Your journey ends in the snow.' });
+        openMenu('gameOver');
+        const sum = document.getElementById('statsSummary');
+        if (sum) {
+            sum.textContent = `Health ${gameState.stats.health} | Morale ${gameState.stats.morale} | Warmth ${gameState.stats.warmth}`;
+        }
     }
 }
 
@@ -68,6 +75,7 @@ function draw() {
 }
 
 window.addEventListener('load', async () => {
+    openMenu('title');
     const canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     ctx.font = '12px sans-serif';
@@ -130,6 +138,11 @@ window.addEventListener('load', async () => {
         updateHUD();
         checkGameOver();
         if (gameEnded) return;
+        if (Math.random() < 0.1) {
+            const q = randomQuip();
+            console.log(q);
+            showToast(q);
+        }
         const next = Math.min(gameState.nodeIndex + 1, nodes.length - 1);
         handleArrival(next);
     });
@@ -165,6 +178,28 @@ window.addEventListener('load', async () => {
     });
 
     updateHUD();
+    initTooltips();
     requestAnimationFrame(draw);
+});
+
+document.body.addEventListener('click', e => {
+    if (e.target.id === 'playBtn' || e.target.id === 'resumeBtn') {
+        closeMenu();
+    } else if (e.target.id === 'restartBtn' || e.target.id === 'tryAgainBtn' || e.target.id === 'quitBtn') {
+        location.reload();
+    } else if (e.target.id === 'optionsBtn') {
+        openMenu('options');
+    }
+});
+
+window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        const overlay = document.getElementById('menuOverlay');
+        if (overlay && overlay.querySelector('#pauseMenu')) {
+            closeMenu();
+        } else if (!overlay) {
+            openMenu('pause');
+        }
+    }
 });
 
