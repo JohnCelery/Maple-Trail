@@ -14,6 +14,13 @@ export const gameState = {
     gear: 0,
     form_duplicate_carbon: 1,
   },
+  wagonPos: { x: 0, y: 0 },
+  nodes: [],
+  gameEnded: false,
+  ui: {
+    travelDisabled: false,
+    campDisabled: false,
+  },
 };
 
 export function clampStat(key) {
@@ -34,6 +41,13 @@ export function modifyInventory(item, delta) {
     window.dispatchEvent(
       new CustomEvent('inventoryChanged', { detail: { item } })
     );
+  }
+}
+
+export function setUIDisabled(key, val) {
+  if (gameState.ui.hasOwnProperty(key)) {
+    gameState.ui[key] = val;
+    window.dispatchEvent(new Event('uiChanged'));
   }
 }
 

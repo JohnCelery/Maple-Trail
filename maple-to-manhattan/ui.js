@@ -1,7 +1,7 @@
 import { gameState } from './state.js';
 import { sprites } from './assets/manifest.js';
 
-export function updateHUD() {
+export function updateUI() {
   ['health', 'morale', 'warmth', 'fuel'].forEach(stat => {
     const span = document.querySelector(`#${stat} .bar span`);
     if (span) span.style.width = `${gameState.stats[stat]}%`;
@@ -29,6 +29,11 @@ export function updateHUD() {
     }
     if (span) span.textContent = gameState.inventory[item];
   });
+
+  const travelBtn = document.getElementById('travelBtn');
+  const campBtn = document.getElementById('campBtn');
+  if (travelBtn) travelBtn.disabled = gameState.ui.travelDisabled;
+  if (campBtn) campBtn.disabled = gameState.ui.campDisabled;
 }
 
 window.addEventListener('statChanged', e => {
