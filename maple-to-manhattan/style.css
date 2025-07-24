@@ -47,3 +47,32 @@ button:hover {
     background: #5fb0ff;
 }
 
+
+#modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+#modal.hidden {
+    display: none;
+}
+#modal .modal {
+    width: 320px;
+    height: 180px;
+    background: #111;
+    border: 4px solid #3fa9f5;
+    padding: 10px;
+    color: #fff;
+}
+
+.bar span.flash {
+    animation: flash 0.3s;
+}
+@keyframes flash {
+    from { background: #fff; }
+    to { background: #3fa9f5; }
+}
