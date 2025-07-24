@@ -31,7 +31,7 @@ The project is intentionally zero‑dependency: pure HTML + CSS + vanill
 Gameplay Features
 Resource Management – Juggle Health, Morale, Warmth, Fuel, Cash; every choice matters when the heater core explodes on a dirt road.
 
-Random Event Deck – Blizzard white‑outs, cassette‑tape morale boosts, border‑agent shenanigans… no two runs are identical.
+Random Event Deck – Blizzard white‑outs, cassette‑tape morale boosts, border‑agent shenanigans, and new Canadian antics like maple syrup heists and rogue Zambonis.
 
 Procedural Map – Each trek generates a fresh chain of road nodes between Québec and Connecticut.
 
