@@ -80,8 +80,8 @@ Sprint	Focus	Status
 #1	Canvas, HUD, wagon movement	✅ Completed
 #2	Random event system + modal	✅ Completed
 #3      Procedural map generator        ✅ Completed
-#4      Vehicle breakdown & inventory   ⏳ In progress
-#5	Border paperwork mini‑game	🚧 Planned
+#4      Vehicle breakdown & inventory   ✅ Completed
+#5	Border paperwork mini‑game	⏳ In progress
 #6	U.S. “upgrade burst” scene	🚧 Planned
 #7	Greenwich finale & credits	🚧 Planned
 #8	Save / load (localStorage)	🚧 Planned

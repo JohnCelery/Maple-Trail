@@ -12,6 +12,7 @@ export const gameState = {
     parts: 0,
     tools: 0,
     gear: 0,
+    form_duplicate_carbon: 1,
   },
 };
 
