@@ -54,6 +54,36 @@ const baseEvents = [
       { stat: 'cash', delta: 20 },
     ],
   },
+  {
+    id: 'GAS_STATION_CACHE',
+    title: 'Abandoned Gas Station',
+    description: 'You find a dusty box of spare parts.',
+    effects: [
+      { inventory: 'parts', delta: 1 },
+    ],
+  },
+  {
+    id: 'FLAT_TIRE',
+    title: 'Flat Tire',
+    description: 'A sharp rock blows out a tire.',
+    choices: [
+      {
+        text: 'Use spare part to repair',
+        requires: { inventory: 'parts', count: 1 },
+        effects: [
+          { inventory: 'parts', delta: -1 },
+          { stat: 'morale', delta: 3 },
+        ],
+      },
+      {
+        text: 'Drive on the rim',
+        effects: [
+          { stat: 'health', delta: -10 },
+          { stat: 'fuel', delta: -5 },
+        ],
+      },
+    ],
+  },
 ];
 
 function shuffle(arr) {
