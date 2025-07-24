@@ -48,3 +48,13 @@ window.addEventListener('inventoryChanged', e => {
 });
 
 
+
+export function showToast(msg) {
+  const div = document.createElement('div');
+  div.className = 'toast';
+  div.textContent = msg;
+  document.body.appendChild(div);
+  setTimeout(() => div.classList.add('fade'), 10);
+  setTimeout(() => div.remove(), 3000);
+}
+

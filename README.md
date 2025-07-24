@@ -38,6 +38,7 @@ Procedural Map – Each trek generates a fresh chain of road nodes between Québ
 Modal Storylets – Pop‑up comics illustrate every disaster (or miracle).
 
 16‑Bit Pixel Art – Authentic 90s palette; Canada in icy blues, the U.S. in warm neons.
+Options Panel – toggle snow FX, adjust sfx volume, and enable Dad Joke pop-ups.
 
 Screenshots & Art
 All art is WIP placeholders—final pixel sets arrive via the Sora art‑pipeline.
@@ -81,12 +82,13 @@ Sprint	Focus	Status
 #2	Random event system + modal	✅ Completed
 #3      Procedural map generator        ✅ Completed
 #4      Vehicle breakdown & inventory   ✅ Completed
-#5	Border paperwork mini‑game	⏳ In progress
-#6	U.S. “upgrade burst” scene	🚧 Planned
-#7	Greenwich finale & credits	🚧 Planned
-#8	Save / load (localStorage)	🚧 Planned
-#9	Final art & audio drop‑in	🚧 Planned
-#10	Polish, accessibility, QA	🚧 Planned
+#5	Border paperwork mini‑game	✅ Completed
+#6      Charming micro‑details & menus  ⏳ In progress
+#7	U.S. “upgrade burst” scene	🚧 Planned
+#8	Greenwich finale & credits	🚧 Planned
+#9	Save / load (localStorage)	🚧 Planned
+#10	Final art & audio drop‑in	🚧 Planned
+#11	Polish, accessibility, QA	🚧 Planned
 
 All engineering tasks are executed via concise Codex prompts (see /docs/codex_prompts/ for history). Art arrives through the Sora agent pipeline under /assets.
 
