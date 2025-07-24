@@ -5,6 +5,13 @@ Table of Contents
 Overview
 
 Gameplay Features
+#6      Charming micro‑details & menus  ✅ Completed
+#7      Fully-featured Title & Menu Screens  ⏳ In progress
+#8      U.S. “upgrade burst” scene      🚧 Planned
+#9      Greenwich finale & credits      🚧 Planned
+#10     Save / load (localStorage)      🚧 Planned
+#11     Final art & audio drop‑in       🚧 Planned
+#12     Polish, accessibility, QA       🚧 Planned
 
 Screenshots & Art
 
@@ -25,6 +32,7 @@ Credits
 Overview
 Maple Trail drops you into January 1995 with a rust‑speckled station wagon, four kids, and just enough cash to (maybe) cross the border.
 Canada is portrayed as a snow‑blasted, dial‑up‑era wasteland; America is a hyperbolic paradise of fast food and indoor heating. Survive random calamities—moose stampedes, frozen gas pumps, rotary‑phone mishaps—and reach the promised land of Greenwich, CT.
+Journey begins in Alberta.
 
 The project is intentionally zero‑dependency: pure HTML + CSS + vanilla ES‑modules. Open index.html in any modern browser and you’re on the road.
 
@@ -83,24 +91,10 @@ Sprint	Focus	Status
 #3      Procedural map generator        ✅ Completed
 #4      Vehicle breakdown & inventory   ✅ Completed
 #5	Border paperwork mini‑game	✅ Completed
-#6      Charming micro‑details & menus  ⏳ In progress
-#7	U.S. “upgrade burst” scene	🚧 Planned
-#8	Greenwich finale & credits	🚧 Planned
-#9	Save / load (localStorage)	🚧 Planned
-#10	Final art & audio drop‑in	🚧 Planned
-#11	Polish, accessibility, QA	🚧 Planned
-
-All engineering tasks are executed via concise Codex prompts (see /docs/codex_prompts/ for history). Art arrives through the Sora agent pipeline under /assets.
-
-Roadmap
-Core Loop Finish – complete map generation, events, finale.
-
-Balancing Pass – tune stat costs, event probabilities.
-
-Pixel Art Integration – replace every placeholder box with final sprites.
-
-Soundtrack & SFX – cassette mixtape music track, snow crunches, moose bellows.
-
-Accessibility – keyboard navigation, reduced‑motion option.
-
-Release Builds – itch.io ZIP & GitHub Pages demo.
+#6      Charming micro‑details & menus  ✅ Completed
+#7      Fully-featured Title & Menu Screens  ⏳ In progress
+#8      U.S. “upgrade burst” scene      🚧 Planned
+#9      Greenwich finale & credits      🚧 Planned
+#10     Save / load (localStorage)      🚧 Planned
+#11     Final art & audio drop‑in       🚧 Planned
+#12     Polish, accessibility, QA       🚧 Planned
