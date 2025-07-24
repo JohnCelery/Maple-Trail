@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maple to Manhattan Trail - Winter 1995 Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <div id="hud">
+        <div class="stat" id="health">Health: <div class="bar"><span></span></div></div>
+        <div class="stat" id="morale">Morale: <div class="bar"><span></span></div></div>
+        <div class="stat" id="warmth">Warmth: <div class="bar"><span></span></div></div>
+        <div class="stat" id="fuel">Fuel: <div class="bar"><span></span></div></div>
+        <div class="stat" id="cashLabel">Cash: $0</div>
+        <button id="travelBtn">Travel</button>
+        <button id="campBtn">Camp</button>
+    </div>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="map.js"></script>
+    <script type="module" src="state.js"></script>
+    <script type="module" src="ui.js"></script>
+</body>
+</html>
+
