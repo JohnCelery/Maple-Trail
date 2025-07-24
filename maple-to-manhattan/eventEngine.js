@@ -84,6 +84,46 @@ const baseEvents = [
       },
     ],
   },
+  {
+    id: 'TIM_HORTONS_RUN',
+    title: 'Tim Hortons Pit Stop',
+    description: 'A box of Timbits and a double-double lift everyone\'s spirits.',
+    effects: [
+      { stat: 'morale', delta: 8 },
+      { stat: 'cash', delta: -5 },
+      { stat: 'warmth', delta: 2 },
+    ],
+  },
+  {
+    id: 'ZAMBONI_JAM',
+    title: 'Zamboni Traffic Jam',
+    description: 'A rogue Zamboni creeps along the highway ahead of you.',
+    effects: [
+      { stat: 'fuel', delta: -5 },
+      { stat: 'morale', delta: -3 },
+    ],
+  },
+  {
+    id: 'MAPLE_SYRUP_HEIST',
+    title: 'Maple Syrup Heist',
+    description: 'You stumble onto a shady maple syrup deal in a snowy parking lot.',
+    choices: [
+      {
+        text: 'Buy a jug for $15',
+        effects: [
+          { stat: 'cash', delta: -15 },
+          { inventory: 'gear', delta: 1 },
+          { stat: 'morale', delta: 5 },
+        ],
+      },
+      {
+        text: 'Drive away politely',
+        effects: [
+          { stat: 'morale', delta: -2 },
+        ],
+      },
+    ],
+  },
 ];
 
 function shuffle(arr) {
