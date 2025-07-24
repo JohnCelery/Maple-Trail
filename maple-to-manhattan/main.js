@@ -7,6 +7,8 @@ import { loadImages, images } from './loader.js';
 
 let ctx, nodes;
 let wagonPos = { x: 0, y: 0 };
+let gameEnded = false;
+let travelBtn, campBtn;
 
 function applyEffects(effects) {
     effects.forEach(e => {
@@ -14,6 +16,28 @@ function applyEffects(effects) {
         if (e.inventory) modifyInventory(e.inventory, e.delta);
     });
     updateHUD();
+    checkGameOver();
+}
+
+function checkGameOver() {
+    if (gameEnded) return;
+    const stats = Object.values(gameState.stats);
+    if (stats.some(v => v <= 0)) {
+        gameEnded = true;
+        travelBtn.disabled = true;
+        campBtn.disabled = true;
+        showModal({ title: 'Game Over', description: 'Your journey ends in the snow.' });
+    }
+}
+
+function checkVictory() {
+    if (gameEnded) return;
+    if (gameState.nodeIndex === nodes.length - 1) {
+        gameEnded = true;
+        travelBtn.disabled = true;
+        campBtn.disabled = true;
+        showModal({ title: 'You Made It!', description: 'Welcome to Greenwich!' });
+    }
 }
 
 function draw() {
@@ -71,8 +95,13 @@ window.addEventListener('load', async () => {
     }
 
     function handleArrival(idx) {
-        travelTo(nodes, idx, wagonPos);
+        travelTo(nodes, idx, wagonPos, () => {
+            if (idx === nodes.length - 1) {
+                checkVictory();
+            }
+        });
         const target = nodes[idx];
+        if (idx === nodes.length - 1) return;
         if (target && target.id === 'BRD') {
             travelBtn.disabled = true;
             campBtn.disabled = true;
@@ -82,8 +111,8 @@ window.addEventListener('load', async () => {
         }
     }
 
-    const travelBtn = document.getElementById('travelBtn');
-    const campBtn = document.getElementById('campBtn');
+    travelBtn = document.getElementById('travelBtn');
+    campBtn = document.getElementById('campBtn');
 
     canvas.addEventListener('click', evt => {
         const rect = canvas.getBoundingClientRect();
@@ -98,6 +127,9 @@ window.addEventListener('load', async () => {
     travelBtn.addEventListener('click', () => {
         modifyStat('fuel', -5);
         modifyStat('warmth', -3);
+        updateHUD();
+        checkGameOver();
+        if (gameEnded) return;
         const next = Math.min(gameState.nodeIndex + 1, nodes.length - 1);
         handleArrival(next);
     });
@@ -107,6 +139,7 @@ window.addEventListener('load', async () => {
         modifyStat('warmth', 5);
         modifyStat('morale', 2);
         updateHUD();
+        checkGameOver();
     });
 
     window.addEventListener('modalClosed', () => {
@@ -116,6 +149,8 @@ window.addEventListener('load', async () => {
 
     window.addEventListener('borderSuccess', () => {
         modifyStat('morale', 10);
+        updateHUD();
+        checkGameOver();
         travelBtn.disabled = false;
         campBtn.disabled = false;
     });
@@ -123,6 +158,8 @@ window.addEventListener('load', async () => {
     window.addEventListener('borderFail', () => {
         modifyStat('cash', -20);
         modifyStat('morale', -5);
+        updateHUD();
+        checkGameOver();
         travelBtn.disabled = false;
         campBtn.disabled = false;
     });

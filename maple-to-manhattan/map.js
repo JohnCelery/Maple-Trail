@@ -23,10 +23,20 @@ export function generateMap(seed = 1) {
       height / 2 + Math.sin(t * Math.PI) * 80 + (rand() * 30 - 15);
     nodes.push({ id: `N${i}`, x, y, label: `Waypoint ${i + 1}` });
   }
+  // label key locations
+  if (nodes.length > 0) {
+    nodes[0].label = 'Qu\u00e9bec City';
+    nodes[0].id = 'START';
+    const mid = Math.floor(nodes.length / 2);
+    nodes[mid].label = 'Border Crossing';
+    nodes[mid].id = 'BRD';
+    nodes[nodes.length - 1].label = 'Greenwich';
+    nodes[nodes.length - 1].id = 'END';
+  }
   return nodes;
 }
 
-export function travelTo(nodes, targetIndex, wagonPos) {
+export function travelTo(nodes, targetIndex, wagonPos, onArrival) {
   const start = nodes[gameState.nodeIndex];
   const target = nodes[targetIndex];
   if (!target) return;
@@ -45,6 +55,7 @@ export function travelTo(nodes, targetIndex, wagonPos) {
     } else {
       gameState.nodeIndex = targetIndex;
       updateHUD();
+      if (onArrival) onArrival(targetIndex);
     }
   }
 
