@@ -1,9 +1,16 @@
 import { gameState, modifyStat } from './state.js';
 import { generateMap, travelTo } from './map.js';
 import { updateHUD } from './ui.js';
+import { initEvents, drawRandomEvent } from './eventEngine.js';
+import { showModal } from './modal.js';
 
 let ctx, nodes;
 let wagonPos = { x: 0, y: 0 };
+
+function applyEffects(effects) {
+    effects.forEach(e => modifyStat(e.stat, e.delta));
+    updateHUD();
+}
 
 function draw() {
     const canvas = document.getElementById('gameCanvas');
@@ -31,9 +38,22 @@ window.addEventListener('load', () => {
     ctx = canvas.getContext('2d');
     ctx.font = '12px sans-serif';
 
+    initEvents();
+
     nodes = generateMap();
     wagonPos.x = nodes[gameState.nodeIndex].x;
     wagonPos.y = nodes[gameState.nodeIndex].y;
+
+    function triggerEvent() {
+        const ev = drawRandomEvent();
+        applyEffects(ev.effects);
+        showModal(ev);
+        travelBtn.disabled = true;
+        campBtn.disabled = true;
+    }
+
+    const travelBtn = document.getElementById('travelBtn');
+    const campBtn = document.getElementById('campBtn');
 
     canvas.addEventListener('click', evt => {
         const rect = canvas.getBoundingClientRect();
@@ -42,21 +62,28 @@ window.addEventListener('load', () => {
         const clicked = nodes.findIndex(n => Math.hypot(n.x - x, n.y - y) < 10);
         if (clicked >= 0) {
             travelTo(clicked);
+            triggerEvent();
         }
     });
 
-    document.getElementById('travelBtn').addEventListener('click', () => {
+    travelBtn.addEventListener('click', () => {
         modifyStat('fuel', -5);
         modifyStat('warmth', -3);
         const next = Math.min(gameState.nodeIndex + 1, nodes.length - 1);
         travelTo(next);
+        triggerEvent();
     });
 
-    document.getElementById('campBtn').addEventListener('click', () => {
+    campBtn.addEventListener('click', () => {
         modifyStat('cash', -5);
         modifyStat('warmth', 5);
         modifyStat('morale', 2);
         updateHUD();
+    });
+
+    window.addEventListener('modalClosed', () => {
+        travelBtn.disabled = false;
+        campBtn.disabled = false;
     });
 
     updateHUD();
