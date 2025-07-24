@@ -1,5 +1,6 @@
 export const gameState = {
   nodeIndex: 0,
+  seed: 1,
   stats: {
     health: 75,
     morale: 75,

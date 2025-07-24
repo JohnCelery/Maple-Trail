@@ -73,12 +73,13 @@ maple‑trail/
 ├─ eventEngine.js      # random event deck (Sprint #2)
 ├─ modal.js            # modal overlay
 ├─ ui.js               # HUD controls & effects
+├─ loader.js           # sprite manifest & loader
 └─ assets/             # art & audio (added in later sprints)
 Development Workflow
 Sprint	Focus	Status
 #1	Canvas, HUD, wagon movement	✅ Completed
-#2	Random event system + modal	⏳ In progress
-#3	Procedural map generator	🚧 Planned
+#2	Random event system + modal	✅ Completed
+#3	Procedural map generator	⏳ In progress
 #4	Vehicle breakdown & inventory	🚧 Planned
 #5	Border paperwork mini‑game	🚧 Planned
 #6	U.S. “upgrade burst” scene	🚧 Planned
