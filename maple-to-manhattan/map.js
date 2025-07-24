@@ -1,5 +1,5 @@
 import { gameState } from './state.js';
-import { updateHUD } from './ui.js';
+import { updateUI } from './ui.js';
 
 function mulberry32(a) {
   return function () {
@@ -54,7 +54,7 @@ export function travelTo(nodes, targetIndex, wagonPos, onArrival) {
       requestAnimationFrame(animate);
     } else {
       gameState.nodeIndex = targetIndex;
-      updateHUD();
+      updateUI();
       if (onArrival) onArrival(targetIndex);
     }
   }

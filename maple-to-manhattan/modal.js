@@ -20,20 +20,18 @@ const icons = {
 };
 
 export function showModal(ev, onChoice) {
-  if (ev.choices) {
-    modal.innerHTML = `<div class="modal">
+  const choicesHtml = ev.choices
+    .map((c, i) => `<button data-idx="${i}" id="choice${i}">${c.text}</button>`)
+    .join('');
+  modal.innerHTML = `<div class="modal">
+      ${ev.image ? `<img src="${ev.image}" class="event-img" />` : ''}
       <h3>${ev.title}</h3>
       <p>${ev.description}</p>
-      <div class="choices">
-        ${ev.choices
-          .map(
-            (c, i) =>
-              `<button data-idx="${i}" id="choice${i}">${c.text}</button>`
-          )
-          .join('')}
-      </div>
+      <div class="choices">${choicesHtml || '<button id="modalOk">OK</button>'}</div>
     </div>`;
-    modal.classList.remove('hidden');
+  modal.classList.remove('hidden');
+
+  if (ev.choices && ev.choices.length) {
     ev.choices.forEach((c, i) => {
       const btn = document.getElementById(`choice${i}`);
       if (c.requires && c.requires.inventory) {
@@ -47,6 +45,7 @@ export function showModal(ev, onChoice) {
         'click',
         () => {
           hideModal();
+          if (typeof c.action === 'function') c.action();
           if (onChoice) onChoice(c);
           window.dispatchEvent(new Event('modalClosed'));
         },
@@ -54,21 +53,6 @@ export function showModal(ev, onChoice) {
       );
     });
   } else {
-    modal.innerHTML = `<div class="modal">
-      <h3>${ev.title}</h3>
-      <p>${ev.description}</p>
-      <ul>
-        ${ev.effects
-          .map(
-            e => `<li>${icons[e.stat || e.inventory] || ''} ${
-            e.stat || e.inventory
-          }: ${e.delta > 0 ? '+' : ''}${e.delta}</li>`
-          )
-          .join('')}
-      </ul>
-      <button id="modalOk">OK</button>
-    </div>`;
-    modal.classList.remove('hidden');
     document.getElementById('modalOk').addEventListener(
       'click',
       () => {
