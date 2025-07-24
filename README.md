@@ -79,8 +79,8 @@ Development Workflow
 Sprint	Focus	Status
 #1	Canvas, HUD, wagon movement	✅ Completed
 #2	Random event system + modal	✅ Completed
-#3	Procedural map generator	⏳ In progress
-#4	Vehicle breakdown & inventory	🚧 Planned
+#3      Procedural map generator        ✅ Completed
+#4      Vehicle breakdown & inventory   ⏳ In progress
 #5	Border paperwork mini‑game	🚧 Planned
 #6	U.S. “upgrade burst” scene	🚧 Planned
 #7	Greenwich finale & credits	🚧 Planned

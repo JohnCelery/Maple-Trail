@@ -8,6 +8,11 @@ export const gameState = {
     fuel: 75,
     cash: 75,
   },
+  inventory: {
+    parts: 0,
+    tools: 0,
+    gear: 0,
+  },
 };
 
 export function clampStat(key) {
@@ -20,5 +25,19 @@ export function modifyStat(key, delta) {
     clampStat(key);
     window.dispatchEvent(new CustomEvent('statChanged', { detail: { key } }));
   }
+}
+
+export function modifyInventory(item, delta) {
+  if (gameState.inventory.hasOwnProperty(item)) {
+    gameState.inventory[item] = Math.max(0, gameState.inventory[item] + delta);
+    window.dispatchEvent(
+      new CustomEvent('inventoryChanged', { detail: { item } })
+    );
+  }
+}
+
+// expose state for modal requirement checks
+if (typeof window !== 'undefined') {
+  window.gameState = gameState;
 }
 

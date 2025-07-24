@@ -1,4 +1,4 @@
-import { gameState, modifyStat } from './state.js';
+import { gameState, modifyStat, modifyInventory } from './state.js';
 import { generateMap, travelTo } from './map.js';
 import { updateHUD } from './ui.js';
 import { initEvents, drawRandomEvent } from './eventEngine.js';
@@ -9,7 +9,10 @@ let ctx, nodes;
 let wagonPos = { x: 0, y: 0 };
 
 function applyEffects(effects) {
-    effects.forEach(e => modifyStat(e.stat, e.delta));
+    effects.forEach(e => {
+        if (e.stat) modifyStat(e.stat, e.delta);
+        if (e.inventory) modifyInventory(e.inventory, e.delta);
+    });
     updateHUD();
 }
 
@@ -54,10 +57,17 @@ window.addEventListener('load', async () => {
 
     function triggerEvent() {
         const ev = drawRandomEvent();
-        applyEffects(ev.effects);
-        showModal(ev);
         travelBtn.disabled = true;
         campBtn.disabled = true;
+
+        if (ev.choices) {
+            showModal(ev, choice => {
+                applyEffects(choice.effects);
+            });
+        } else {
+            applyEffects(ev.effects);
+            showModal(ev);
+        }
     }
 
     const travelBtn = document.getElementById('travelBtn');
