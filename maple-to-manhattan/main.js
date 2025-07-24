@@ -70,6 +70,18 @@ window.addEventListener('load', async () => {
         }
     }
 
+    function handleArrival(idx) {
+        travelTo(nodes, idx, wagonPos);
+        const target = nodes[idx];
+        if (target && target.id === 'BRD') {
+            travelBtn.disabled = true;
+            campBtn.disabled = true;
+            import('./borderMinigame.js').then(m => m.startMiniGame());
+        } else {
+            triggerEvent();
+        }
+    }
+
     const travelBtn = document.getElementById('travelBtn');
     const campBtn = document.getElementById('campBtn');
 
@@ -79,8 +91,7 @@ window.addEventListener('load', async () => {
         const y = evt.clientY - rect.top;
         const clicked = nodes.findIndex(n => Math.hypot(n.x - x, n.y - y) < 10);
         if (clicked >= 0) {
-            travelTo(nodes, clicked, wagonPos);
-            triggerEvent();
+            handleArrival(clicked);
         }
     });
 
@@ -88,8 +99,7 @@ window.addEventListener('load', async () => {
         modifyStat('fuel', -5);
         modifyStat('warmth', -3);
         const next = Math.min(gameState.nodeIndex + 1, nodes.length - 1);
-        travelTo(nodes, next, wagonPos);
-        triggerEvent();
+        handleArrival(next);
     });
 
     campBtn.addEventListener('click', () => {
@@ -100,6 +110,19 @@ window.addEventListener('load', async () => {
     });
 
     window.addEventListener('modalClosed', () => {
+        travelBtn.disabled = false;
+        campBtn.disabled = false;
+    });
+
+    window.addEventListener('borderSuccess', () => {
+        modifyStat('morale', 10);
+        travelBtn.disabled = false;
+        campBtn.disabled = false;
+    });
+
+    window.addEventListener('borderFail', () => {
+        modifyStat('cash', -20);
+        modifyStat('morale', -5);
         travelBtn.disabled = false;
         campBtn.disabled = false;
     });

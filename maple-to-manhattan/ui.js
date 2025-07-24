@@ -1,4 +1,5 @@
 import { gameState } from './state.js';
+import { sprites } from './assets/manifest.js';
 
 export function updateHUD() {
   ['health', 'morale', 'warmth', 'fuel'].forEach(stat => {
@@ -8,8 +9,24 @@ export function updateHUD() {
   const label = document.getElementById('cashLabel');
   if (label) label.textContent = `Cash: $${gameState.stats.cash}`;
 
-  ['parts', 'tools', 'gear'].forEach(item => {
-    const span = document.getElementById(`${item}Count`);
+  const invDiv = document.getElementById('inventory');
+  Object.keys(gameState.inventory).forEach(item => {
+    let span = document.getElementById(`${item}Count`);
+    if (!span && invDiv) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'inv-item';
+      if (sprites[item]) {
+        const img = document.createElement('img');
+        img.src = sprites[item];
+        img.width = 16;
+        img.height = 16;
+        wrapper.appendChild(img);
+      }
+      span = document.createElement('span');
+      span.id = `${item}Count`;
+      wrapper.appendChild(span);
+      invDiv.appendChild(wrapper);
+    }
     if (span) span.textContent = gameState.inventory[item];
   });
 }
