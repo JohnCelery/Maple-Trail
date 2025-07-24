@@ -3,7 +3,9 @@ import { generateMap, travelTo } from './map.js';
 import { updateHUD, showToast } from './ui.js';
 import { initEvents, drawRandomEvent } from './eventEngine.js';
 import { showModal } from './modal.js';
-import { openMenu, closeMenu } from './menuManager.js';
+import { showTitleScreen } from './titleScreen.js';
+import { togglePauseMenu } from './pauseMenu.js';
+import { showGameOverScreen } from './gameOverScreen.js';
 import { randomQuip } from './flavor.js';
 import { initTooltips } from './tooltip.js';
 import { loadImages, images } from './loader.js';
@@ -29,11 +31,7 @@ function checkGameOver() {
         gameEnded = true;
         travelBtn.disabled = true;
         campBtn.disabled = true;
-        openMenu('gameOver');
-        const sum = document.getElementById('statsSummary');
-        if (sum) {
-            sum.textContent = `Health ${gameState.stats.health} | Morale ${gameState.stats.morale} | Warmth ${gameState.stats.warmth}`;
-        }
+        showGameOverScreen(gameState.stats);
     }
 }
 
@@ -75,7 +73,7 @@ function draw() {
 }
 
 window.addEventListener('load', async () => {
-    openMenu('title');
+    showTitleScreen();
     const canvas = document.getElementById('gameCanvas');
     ctx = canvas.getContext('2d');
     ctx.font = '12px sans-serif';
@@ -183,23 +181,12 @@ window.addEventListener('load', async () => {
 });
 
 document.body.addEventListener('click', e => {
-    if (e.target.id === 'playBtn' || e.target.id === 'resumeBtn') {
-        closeMenu();
-    } else if (e.target.id === 'restartBtn' || e.target.id === 'tryAgainBtn' || e.target.id === 'quitBtn') {
-        location.reload();
-    } else if (e.target.id === 'optionsBtn') {
-        openMenu('options');
-    }
+    // interactions handled within individual screens
 });
 
 window.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-        const overlay = document.getElementById('menuOverlay');
-        if (overlay && overlay.querySelector('#pauseMenu')) {
-            closeMenu();
-        } else if (!overlay) {
-            openMenu('pause');
-        }
+        togglePauseMenu();
     }
 });
 

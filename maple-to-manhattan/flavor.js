@@ -19,6 +19,16 @@ export const QUIPS = [
   "Frosty air makes your nostrils stick together.",
   "A mysterious smell reminds you of gym class.",
   "Your map is now 70% duct tape.",
+  "Kid finds petrified beaver tail – trade value dubious.",
+  "Local gas station sells antifreeze popsicles.",
+  "You spot a frozen tumbleweed of hockey tape.",
+  "Road sign reads: 'Next Tim Hortons 300km'.",
+  "Truck ahead drops a snowman off the back.",
+  "Engine sputters but politely apologizes.",
+  "A distant loon laughs at your misfortune.",
+  "Kids debate if moose can be pets.",
+  "Ice fog turns headlights into halos.",
+  "You hear rumors of a warm igloo resort nearby.",
 ];
 
 export function randomQuip() {

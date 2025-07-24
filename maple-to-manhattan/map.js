@@ -25,8 +25,8 @@ export function generateMap(seed = 1) {
   }
   // label key locations
   if (nodes.length > 0) {
-    nodes[0].label = 'Qu\u00e9bec City';
-    nodes[0].id = 'START';
+    nodes[0].label = 'Snow-packed Alberta';
+    nodes[0].id = 'AB';
     const mid = Math.floor(nodes.length / 2);
     nodes[mid].label = 'Border Crossing';
     nodes[mid].id = 'BRD';
